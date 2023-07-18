@@ -349,7 +349,7 @@ Create the Placement resource and bind it to `all-clusters` ManagedClusterSet. N
 ```
 <hub> $ cat >> placement.yaml << EOF
 ---
-apiVersion: cluster.open-cluster-management.io/v1alpha1
+apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
 metadata:
   name: all-clusters
