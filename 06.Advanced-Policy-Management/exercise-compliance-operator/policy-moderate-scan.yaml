@@ -75,13 +75,27 @@ spec:
                     compliance.openshift.io/check-status: FAIL
                     compliance.openshift.io/suite: moderate
 ---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: policy-moderate-scan-placement
+  namespace: rhacm-policies
+spec:
+  clusterSelector:
+    matchExpressions:
+      - key: environment
+        operator: In
+        values:
+          - dev
+  clusterConditions: []
+---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: policy-moderate-scan-binding
   namespace: rhacm-policies
 placementRef:
-  name: prod-policies-clusters
+  name: policy-moderate-scan-placement
   kind: PlacementRule
   apiGroup: apps.open-cluster-management.io
 subjects:
