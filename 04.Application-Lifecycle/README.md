@@ -297,6 +297,13 @@ Log into the ArgoCD instance by pressing on `Log In via OpenShift`.
 
 Now that you have a running instance of ArgoCD, let's integrate it with RHACM!
 
+## Using Script 
+```
+git clone https://github.com/tosin2013/sno-quickstarts.git
+cd sno-quickstarts/gitops
+./deploy.sh
+```
+
 ## Preparing RHACM for ArgoCD Integration
 
 In this part you will create the resources to import `local-cluster` into ArgoCD's managed clusters.
@@ -306,7 +313,7 @@ Create the next ManagedClusterSet resource. The ManagedClusterSet resource will 
 ```
 <hub> $ cat >> managedclusterset.yaml << EOF
 ---
-apiVersion: cluster.open-cluster-management.io/v1beta1
+apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSet
 metadata:
   name: all-clusters
@@ -332,7 +339,7 @@ Create the ManagedClusterSetBinding resource to bind the `local-cluster` Managed
 ```
 <hub> $ cat >> managedclustersetbinding.yaml << EOF
 ---
-apiVersion: cluster.open-cluster-management.io/v1beta1
+apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSetBinding
 metadata:
   name: all-clusters

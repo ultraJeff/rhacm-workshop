@@ -2,6 +2,8 @@
 
 In this exercise you enable and use the `Observability` function in Red Hat Advanced Cluster Management. You will configure observability, explore the built-in dashboards, enable custom alerts using Thanos Ruler and design custom dashboards for your own organizational needs.
 
+[Install MultiCluster Observability](https://github.com/tosin2013/acm-multi-cluster-dashboard/blob/main/install-acm-observability-service.md)
+
 ### 3.1 - Deploying Observability
 
 This part focuses on the `Observability` addon deployment. In order to deploy the functionality, you have to obtain an object storage provider. For this deployment you will use [minio](https://min.io/). A PVC will be assigned to a minio pod which will create a bucket and export an S3 object storage endpoint. The endpoint's information and credentials are exported in a secret with the `thanos-object-storage` name.
