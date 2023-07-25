@@ -67,6 +67,20 @@ spec:
                   source: redhat-operators
                   sourceNamespace: openshift-marketplace
 ---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: policy-compliance-operator-placement
+  namespace: rhacm-policies
+spec:
+  clusterSelector:
+    matchExpressions:
+      - key: environment
+        operator: In
+        values:
+          - dev
+  clusterConditions: []
+---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
