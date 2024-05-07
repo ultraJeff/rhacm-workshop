@@ -1,19 +1,17 @@
 # Exercise 4 - Application Lifecycle
 
-In this exercise you will deploy a demo application onto the cluster using Red Hat Advanced Cluster Management for Kubernetes. You will manage the application versions and use cluster labels to configure placement mechanisms.
+In this exercise, you will deploy a demo application to the cluster using Red Hat Advanced Cluster Management for Kubernetes. You will manage the application versions and use cluster labels to configure placement mechanisms. You will try to deploy an application that manages two versions:
 
-In this exercise you will try to deploy an application that manages two versions -
+* Development - [https://github.com/ultraJeff/rhacm-workshop/tree/dev/04.Application-Lifecycle/exercise-application/application-resources](https://github.com/ultraJeff/rhacm-workshop/tree/dev/04.Application-Lifecycle/exercise-application/application-resources)
+* Production - [https://github.com/ultraJeff/rhacm-workshop/tree/master/04.Application-Lifecycle/exercise-application/application-resources]
 
-* Development - [https://github.com/michaelkotelnikov/rhacm-workshop/tree/dev/04.Application-Lifecycle/exercise-application/application-resources](https://github.com/michaelkotelnikov/rhacm-workshop/tree/dev/04.Application-Lifecycle/exercise-application/application-resources)
-* Production - [https://github.com/michaelkotelnikov/rhacm-workshop/tree/master/04.Application-Lifecycle/exercise-application/application-resources](https://github.com/michaelkotelnikov/rhacm-workshop/tree/master/04.Application-Lifecycle/exercise-application/application-resources)
+Both application versions are stored in the same Git repository, while the **production** version is stored in the **master** branch, and the **development** version is stored in the **dev** branch.
 
-Both versions of the application are stored in the same Git repository, while the **production** version is stored in the **master** branch, and the **development** version is stored in the **dev** branch.
+The application is a simple web application that provides different outputs for each version. The **development** application will provide a web page, while the **production** application will provide a different one.
 
-The Application is a simple web application that provides a different output in each version. The **development** application will provide a web page, while the **production** application will provide a different web page.
+Each application version will run on a cluster with the relevant tag. The application with the **development** version will run on clusters with the **environment=dev** label, while the application with the **production** version will run on clusters with the **environment=production** label. 
 
-Each version of the application will run on a cluster with the relevant tag. The application with the **development** version will run on clusters with the **environment=dev** label, while the application with the **production** version will run on clusters with the **environment=production** label. 
-
-To achieve a functioning application create the next resources -
+To achieve a functioning application, create the following resources -
 
 * **Namespace** - Create a namespace in which the custom resources are going to be deployed on the hub.
 
@@ -30,7 +28,7 @@ EOF
 ```
 
 
-* **Channel** - Create a channel that refers to the GitHub repository in which the application’s resources are placed. The GitHub repository is at - [https://github.com/michaelkotelnikov/rhacm-workshop.git](https://github.com/michaelkotelnikov/rhacm-workshop.git)
+* **Channel** - Create a channel that refers to the GitHub repository in which the application’s resources are placed. The GitHub repository is at [https://github.com/ultraJeff/rhacm-workshop.git](https://github.com/ultraJeff/rhacm-workshop.git)
 
 ```
 <hub> $ cat >> channel.yaml << EOF
@@ -71,7 +69,7 @@ EOF
 <hub> $ oc apply -f placementrule-dev.yaml
 ```
 
-* **Subscription** - Create a subscription that binds between the defined above **PlacementRule** and **Channel** resources. The subscription will point to the relevant path on which the application resources are present - _04.Application-Lifecycle/exercise-application/application-resources_. Furthermore, the Subscription will point to the **dev** branch, in order to deploy the development version of the application.
+* **Subscription** - Create a subscription that binds between the defined above **PlacementRule** and **Channel** resources. The subscription will point to the relevant path on which the application resources are present - _04.Application-Lifecycle/exercise-application/application-resources_. Furthermore, the Subscription will point to the **dev** branch to deploy the development version of the application.
 
 ```
 <hub> $ cat >> subscription-dev.yaml << EOF
@@ -206,10 +204,10 @@ Note that the application is now deployed at its “production” version on **l
 
 Click on the application’s route resource, and navigate to **https://&lt;route-url>/application.html**. The application now serves a different webpage, indicating that the application is in a production state.
 
-**NOTE:** All of the resources you have configured in this exercise are present in the [git repository](https://github.com/michaelkotelnikov/rhacm-workshop.git). The resources can be created by running the next command -
+**NOTE:** All of the resources you have configured in this exercise are present in the [git repository](https://github.com/ultraJeff/rhacm-workshop.git). The resources can be created by running the next command -
 
 ```
-<hub> $ oc apply -f https://raw.githubusercontent.com/michaelkotelnikov/rhacm-workshop/master/04.Application-Lifecycle/exercise-application/rhacm-resources/application.yaml
+<hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/04.Application-Lifecycle/exercise-application/rhacm-resources/application.yaml
 ```
 
 # ArgoCD Integration
