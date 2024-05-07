@@ -405,11 +405,11 @@ Note that two application instances have been created in the ArgoCD UI
 
 ![argocd-applications](images/argocd-applications.png)
 
-After viewing the applications and their resources in the ArgoCD dashboard, log into RHACM's web console, and navigate to **Applications**. Note that RHACM identifies the deployed ApplicationSet and provides an entry for both applications -
+After viewing the applications and their resources in the ArgoCD dashboard, log into RHACM's web console and navigate to **Applications**. Note that RHACM identifies the deployed ApplicationSet and provides an entry for both applications
 
 ![argocd-rhacm-applications](images/argocd-rhacm-applications.png)
 
-The deployed application resources can be seen in the ApplicationSet instance in RHACM
+The deployed application resources are shown in the ApplicationSet instance in RHACM
 
 ![rhacm-argocd-app-details](images/rhacm-argocd-app-details.png)
 
