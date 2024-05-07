@@ -127,7 +127,7 @@ EOF
 The above command creates two objects _Policy_ and _PlacementBinding_.
 
 * The _Policy_ objects define the NetworkPolicy that will be deployed on the managed cluster. It associates the NetworkPolicy with the webserver-acm namespace and enforces it.
-* The _PlacementRule_ resource associates the _Policy_ object with the _PlacementRule _resource that was created in the beginning of the exercise. This allows the Policy to be applied to all clusters with the _environment=production_ label.
+* The _PlacementBinding_ resource associates the _Policy_ object with the _PlacementRule_ resource created at the beginning of the exercise, allowing the Policy to apply to all clusters with the _environment=production_ label.
 
 After creating the objects, navigate to **Governance** -> **Policies** in the Red Hat Advanced Cluster Management for Kubernetes console. Note that the policy is configured, and the managed cluster is compliant.
 
