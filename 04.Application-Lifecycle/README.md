@@ -11,7 +11,7 @@ The application is a simple web application that provides different outputs for 
 
 Each application version will run on a cluster with the relevant tag. The application with the **development** version will run on clusters with the **environment=dev** label, while the application with the **production** version will run on clusters with the **environment=production** label. 
 
-To achieve a functioning application, create the following resources -
+To achieve a functioning application, create the following resources:
 
 * **Namespace** - Create a namespace in which the custom resources are going to be deployed on the hub.
 
@@ -95,7 +95,7 @@ EOF
 <hub> $ oc apply -f subscription-dev.yaml 
 ```
 
-* **Application** - Create an Application resource to aggregate Subscription resources. The Application resource aggregates the Subscription resources by using labels. In this case, you will be using the label - **app: webserver-app**.
+* **Application** - Create an Application resource to aggregate Subscription resources. The Application resource aggregates the Subscription resources by using labels. In this case, you will use the label - **app: webserver-app**.
 
 ```
 <hub> $ cat >> application.yaml << EOF
@@ -121,9 +121,9 @@ EOF
 <hub> $ oc apply -f application.yaml 
 ```
 
-After the resources are created. In the RHACM portal, navigate to **Applications** -> **&lt;application name>**. Make sure that the resources are created.
+After the resources are created in the RHACM portal, navigate to **Applications** -> **&lt;application name>**. Make sure that the resources are created.
 
-Run the next command on the managed cluster -
+Run the next command on the managed cluster
 
 ```
 <managed> $ oc get route -n webserver-acm
@@ -131,13 +131,13 @@ Run the next command on the managed cluster -
 
 Navigate to the application's frontend at **https://&lt;route-url>/application.html**
 
-Make sure that the application is running the **development version** on the cluster. Validate that the application is deployed by running the next command -
+Make sure that the application is running the **development version** on the cluster. Validate that the application is deployed by running the next command
 
 ```
 <managed cluster> $ oc get pods -n webserver-acm
 ```
 
-Now that you have the **Development** version of the application running, it’s time to deploy the **Production** version alongside the **Development** version. Create the next resources -
+Now that you have the **Development** version of the application running, it’s time to deploy the **Production** version alongside the **Development** version. Create the next resources
 
 * **PlacementRule** - Create a PlacementRule that aggregates the **production** clusters using the **environment=production** label.
 
@@ -161,7 +161,7 @@ EOF
 <hub> $ oc apply -f placementrule-production.yaml
 ```
 
-*   **Subscription** - Create a Subscription that maps the newly created **PlacementRule** to the previously created **Channel**. The subscription uses the **master** branch in the **Channel** in order to run the **production** version of the application.
+*   **Subscription** - Create a Subscription that maps the newly created **PlacementRule** to the previously created **Channel**. The subscription uses the **master** branch in the **Channel** to run the **production** version of the application.
 
 ```
 <hub> $ cat >> subscription-production.yaml << EOF
@@ -190,7 +190,7 @@ After creating the resources,  navigate to **Applications** -> **webserver-app**
 
 ![application-dev](images/application-dev.png)
 
-In order to deploy the production application on **local-cluster** -
+To deploy the production application on **local-cluster** -
 
 *   navigate to **Clusters** -> **local-cluster** -> **Actions** -> **Edit labels**.
 *   Remove the **environment=dev** label.
@@ -198,13 +198,13 @@ In order to deploy the production application on **local-cluster** -
 
 Wait for about 2 minutes for the application to redeploy on **local-cluster**, and navigate to **Applications** -> **webserver-app**.
 
-Note that the application is now deployed at its “production” version on **local-cluster**.
+Note that the application is now deployed on the “production” version of **local-cluster**.
 
 ![application-prod](images/application-prod.png)
 
-Click on the application’s route resource, and navigate to **https://&lt;route-url>/application.html**. The application now serves a different webpage, indicating that the application is in a production state.
+Click on the application’s route resource and navigate to **https://&lt;route-url>/application.html**. The application now serves a different webpage, indicating that the application is in a production state.
 
-**NOTE:** All of the resources you have configured in this exercise are present in the [git repository](https://github.com/ultraJeff/rhacm-workshop.git). The resources can be created by running the next command -
+**NOTE:** All of the resources you have configured in this exercise are present in the [git repository](https://github.com/ultraJeff/rhacm-workshop.git). The resources can be created by running the next command
 
 ```
 <hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/04.Application-Lifecycle/exercise-application/rhacm-resources/application.yaml
