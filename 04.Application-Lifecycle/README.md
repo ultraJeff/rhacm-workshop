@@ -40,7 +40,7 @@ metadata:
   namespace: webserver-acm
 spec:
   type: Git
-  pathname: https://github.com/tosin2013/rhacm-workshop.git
+  pathname: https://github.com/ultraJeff/rhacm-workshop.git
 EOF
 
 <hub> $ oc apply -f channel.yaml
@@ -297,7 +297,7 @@ Now that you have a running instance of ArgoCD, let's integrate it with RHACM!
 
 ## Using Script 
 ```
-git clone https://github.com/tosin2013/sno-quickstarts.git
+git clone https://github.com/ultraJeff/sno-quickstarts.git
 cd sno-quickstarts/gitops
 ./deploy.sh
 ```
@@ -403,9 +403,9 @@ The applications are based on one [helm](https://helm.sh/) chart. Each applicati
 To create the ApplicationSet resource run the next commands -
 
 ```
-<hub> $ oc apply -f https://raw.githubusercontent.com/tosin2013/rhacm-workshop/master/04.Application-Lifecycle/demo-argocd/argocd-resources/appproject.yaml
+<hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/04.Application-Lifecycle/demo-argocd/argocd-resources/appproject.yaml
 
-<hub> $ oc apply -f https://raw.githubusercontent.com/tosin2013/rhacm-workshop/master/04.Application-Lifecycle/demo-argocd/argocd-resources/applicationset.yaml
+<hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/04.Application-Lifecycle/demo-argocd/argocd-resources/applicationset.yaml
 ```
 
 Note that two application instances have been created in the ArgoCD UI -

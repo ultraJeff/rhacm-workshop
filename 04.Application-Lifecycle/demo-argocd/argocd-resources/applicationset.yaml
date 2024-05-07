@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/tosin2013/rhacm-workshop.git
+      repoURL: https://github.com/ultraJeff/rhacm-workshop.git
       revision: master
       directories:
       - path: 04.Application-Lifecycle/demo-argocd/mariadb-resources/*
@@ -16,7 +16,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/tosin2013/rhacm-workshop.git
+        repoURL: https://github.com/ultraJeff/rhacm-workshop.git
         targetRevision: master
         path: '{{path}}'
       destination:

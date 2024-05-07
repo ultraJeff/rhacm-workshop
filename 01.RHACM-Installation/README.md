@@ -5,6 +5,6 @@ In this exercise you will install the Advanced Cluster Management for Kubernetes
 To install the up-to-date instance of Advanced Cluster Management, follow the steps presented in the **Installation** section of the workshop’s presentation - [https://docs.google.com/presentation/d/1LCPvIT_nF5hwnrfYdlD0Zie4zdDxc0kxZtW3Io5jfFk/edit?usp=sharing](https://docs.google.com/presentation/d/1LCPvIT_nF5hwnrfYdlD0Zie4zdDxc0kxZtW3Io5jfFk/edit?usp=sharing).
 
 ```
-oc create -k https://github.com/tosin2013/sno-quickstarts/gitops/cluster-config/rhacm-operator/base
-oc create -k https://github.com/tosin2013/sno-quickstarts/gitops/cluster-config/rhacm-instance/overlays/basic
+oc create -k https://github.com/ultraJeff/sno-quickstarts/gitops/cluster-config/rhacm-operator/base
+oc create -k https://github.com/ultraJeff/sno-quickstarts/gitops/cluster-config/rhacm-instance/overlays/basic
 ```

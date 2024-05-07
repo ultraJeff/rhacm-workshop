@@ -2,7 +2,7 @@
 
 In this exercise you enable and use the `Observability` function in Red Hat Advanced Cluster Management. You will configure observability, explore the built-in dashboards, enable custom alerts using Thanos Ruler and design custom dashboards for your own organizational needs.
 
-[Install MultiCluster Observability](https://github.com/tosin2013/acm-multi-cluster-dashboard/blob/main/install-acm-observability-service.md)
+[Install MultiCluster Observability](https://github.com/ultraJeff/acm-multi-cluster-dashboard/blob/main/install-acm-observability-service.md)
 
 ### 3.1 - Deploying Observability
 
