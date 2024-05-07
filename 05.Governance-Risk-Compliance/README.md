@@ -5,7 +5,7 @@ In this exercise, you will go through the compliance features of Red Hat Advance
 **NOTE!** The exercise depends on the ACM application deployed in the previous exercise (NOT the application deployed using ArgoCD). If the application is not available in your environment, run the following command to deploy it
 
 ```
-<hub> $ oc apply -f https://raw.githubusercontent.com/michaelkotelnikov/rhacm-workshop/master/04.Application-Lifecycle/exercise-application/rhacm-resources/application.yaml
+<hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/04.Application-Lifecycle/exercise-application/rhacm-resources/application.yaml
 ```
 
 **NOTE!** Ensure the `environment=production` label is associated with one of your managed clusters!
@@ -165,6 +165,8 @@ spec:
 
 Adding the NetworkPolicy to the existing policy can be done by running the following command:
 
+Note: the Policy resource already exists, so it is vital to use `oc apply` here or delete the existing `policy-networkpolicy-webserver` first.
+
 ```
 <hub> $ cat >> networkpolicy-policy.yaml << EOF
 ---
@@ -230,20 +232,6 @@ spec:
                   podSelector: {}
                   policyTypes:
                   - Ingress
----
-apiVersion: policy.open-cluster-management.io/v1
-kind: PlacementBinding
-metadata:
-  name: binding-policy-networkpolicy-webserver
-  namespace: rhacm-policies
-placementRef:
-  name: prod-policies-clusters
-  kind: PlacementRule
-  apiGroup: apps.open-cluster-management.io
-subjects:
-- name: policy-networkpolicy-webserver
-  kind: Policy
-  apiGroup: policy.open-cluster-management.io
 EOF
 
 <hub> $ oc apply -f networkpolicy-policy.yaml
@@ -367,7 +355,9 @@ Notice that if you list the LimitRange resource again, the value of the memory l
 ...
 ```
 
-## Policy #3 - Namespace management
+### DIY Policy - Namespace management
+
+Can you create your own policy?
 
 In this section, you will create a policy that `informs` if a namespace with the name `rhacm-dangerous-policy-namespace` is present. Make sure to create the policy in the `rhacm-policies` namespace. You may use the policies you've created in this exercise as a reference for creating this policy.
 
@@ -383,7 +373,7 @@ Change the remediationAction in your policy to `enforce`. The violation should b
 
 ## Using GitOps
 
-In this section, you will use RHACM’s built-in GitOps mechanism to manage your policies. You will deploy the above policies, and manage them in a GitOps friendly way.
+In this section, you will use RHACM’s built-in GitOps mechanism to manage your policies. You will deploy the above policies and manage them in a GitOps-friendly way.
 
 Before you start this exercise section, delete the namespace containing the policies you used in the previous section.
 
@@ -391,9 +381,9 @@ Before you start this exercise section, delete the namespace containing the poli
 <hub> $ oc delete project rhacm-policies
 ```
 
-1. For this exercise, create a fork of the following GitHub repository - [https://github.com/michaelkotelnikov/rhacm-workshop](https://github.com/michaelkotelnikov/rhacm-workshop)
+1. For this exercise, create a fork of the following GitHub repository - [https://github.com/ultraJeff/rhacm-workshop](https://github.com/ultraJeff/rhacm-workshop)
 
-    As a result, you will have your own version of the repository - [https://github.com/&lt;your-username>/rhacm-workshop](https://github.com/michaelkotelnikov/rhacm-workshop)
+    As a result, you will have your version of the repository - **https://github.com/&lt;your-username>/rhacm-workshop**
 
 2. Afterward, create a namespace on which you will deploy the RHACM resources (Use the namespace.yaml file in the forked repository)
 
@@ -466,7 +456,7 @@ spec:
 ![policies-overview](images/policies-overview.png)
 
 
-8. Edit the LimitRange policy in [https://github.com/&lt;your-username>/rhacm-workshop/blob/master/05.Governance-Risk-Compliance/exercise/exercise-policies/limitrange-policy.yaml](https://github.com/michaelkotelnikov/rhacm-workshop/blob/master/05.Governance-Risk-Compliance/exercise/exercise-policies/limitrange-policy.yaml). Change the default container limit from 512Mi to 1024Mi.
+8. Edit the LimitRange policy in **https://github.com/&lt;your-username>/rhacm-workshop/blob/master/05.Governance-Risk-Compliance/exercise/exercise-policies/limitrange-policy.yaml**. Change the default container limit from 512Mi to 1024Mi.
 
 9. Make sure that you commit and push the change to your fork.
 
@@ -509,7 +499,7 @@ data:
 Deploy the templated policy by running the following command on the hub cluster:
 
 ```
-<hub> $ oc apply -f https://raw.githubusercontent.com/michaelkotelnikov/rhacm-workshop/master/05.Governance-Risk-Compliance/exercise/exercise-templates/metrics-configmap.yaml
+<hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/05.Governance-Risk-Compliance/exercise/exercise-templates/metrics-configmap.yaml
 ```
 
 The policy will appear on the Governance dashboard in a non-compliant state. The policy depends on the `mariadb` Secret resource and the `mariadb` Service resource. Since you have not created them, the policy cannot create the desired ConfigMap resource.
@@ -517,10 +507,10 @@ The policy will appear on the Governance dashboard in a non-compliant state. The
 Deploy the `mariadb-metrics` application to create the MariaDB and exporter instances. Deploy the application by running the following command:
 
 ```
-<hub> $ oc apply -f https://raw.githubusercontent.com/michaelkotelnikov/rhacm-workshop/master/05.Governance-Risk-Compliance/exercise/exercise-application/rhacm-resources/application.yaml
+<hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/05.Governance-Risk-Compliance/exercise/exercise-application/rhacm-resources/application.yaml
 ```
 
-Wait until the application is available. After the application is available, make sure that the policy you have deployed is compliant with the Governance dashboard. Ensure the template works by running the following command on the managed cluster:
+Wait until the application is available. After the application is available, ensure that the policy you have deployed complies with the Governance dashboard. Ensure the template works by running the following command on the managed cluster:
 
 ```
 <managed cluster> $ oc get configmap metrics-connection-string -o yaml -n mariadb-metrics
