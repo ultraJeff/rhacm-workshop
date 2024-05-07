@@ -210,7 +210,7 @@ Click on the application’s route resource and navigate to **https://&lt;route-
 <hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/04.Application-Lifecycle/exercise-application/rhacm-resources/application.yaml
 ```
 
-# ArgoCD Integration
+<!-- # ArgoCD Integration
 
 This section discusses the process of deploying an application using ArgoCD in an Advanced Cluster Management for Kubernetes environment. The section will follow the process of ArgoCD installation, integration with RHACM and application deployment.
 
@@ -293,18 +293,11 @@ openshift-gitops-server   openshift-gitops-server-openshift-gitops.<FQDN>   open
 
 Log into the ArgoCD instance by pressing on `Log In via OpenShift`.
 
-Now that you have a running instance of ArgoCD, let's integrate it with RHACM!
-
-## Using Script 
-```
-git clone https://github.com/ultraJeff/sno-quickstarts.git
-cd sno-quickstarts/gitops
-./deploy.sh
-```
+Now that you have a running instance of ArgoCD, let's integrate it with RHACM! -->
 
 ## Preparing RHACM for ArgoCD Integration
 
-In this part you will create the resources to import `local-cluster` into ArgoCD's managed clusters.
+In this part, you will create the resources to import `local-cluster` into ArgoCD's managed clusters.
 
 Create the next ManagedClusterSet resource. The ManagedClusterSet resource will include the `local-cluster` cluster. The ManagedClusterSet resource is associated with the `openshift-gitops` namespace.
 
@@ -390,17 +383,17 @@ EOF
 <hub> $ oc apply -f gitopsserver.yaml
 ```
 
-Make sure that `local cluster` is imported into ArgoCD. In ArgoCD's web UI, on the left menu bar, navigate to **Manage your repositories, projects, settings** -> **Clusters**. You should see `local-cluster` in the cluster list.
+Make sure that `local-cluster` is imported into ArgoCD. In ArgoCD's web UI, on the left menu bar, navigate to **Manage your repositories, projects, settings** -> **Clusters**. You should see `local-cluster` in the cluster list.
 
 ![argocd-cluster](images/argocd-cluster.png)
 
 ## Deploying an ApplicationSet using ArgoCD
 
-Now that you integrated ArgoCD with RHACM, let's deploy an ApplicationSet resource using ArgoCD. The applications you're going to create in this part are based on the same applications you have created in the beginning of the exercise - One web server application for a development environment and one for a production environment.
+Now that you have integrated ArgoCD with RHACM, let's deploy an ApplicationSet resource using ArgoCD. The applications you will create in this part are based on the same applications you created at the beginning of the exercise - one web server application for a development environment and one for a production environment.
 
-The applications are based on one [helm](https://helm.sh/) chart. Each application in the set is identified by its own unique `values.yaml` file. The applications are using the same baseline kubernetes resources at - [exercise-argocd/application-resources/templates](exercise-argocd/application-resources/templates), but they are using different `values` files at - [exercise-argocd/application-resources/values](exercise-argocd/application-resources/values). Each instance of the application uses a separate values set. The ApplicationSet resource iterates over the directories in the [exercise-argocd/application-resources/values](exercise-argocd/application-resources/values) directory and creates an instance of an application for each directory name.
+The applications are based on one [helm](https://helm.sh/) chart. Each application in the set is identified by its own unique `values.yaml` file. The applications are using the same baseline kubernetes resources at - [exercise-argocd/application-resources/templates](exercise-argocd/application-resources/templates), but they are using different `values` files at - [exercise-argocd/application-resources/values](exercise-argocd/application-resources/values). Each instance of the application uses a separate value set. The ApplicationSet resource iterates over the directories in the [exercise-argocd/application-resources/values](exercise-argocd/application-resources/values) directory and creates an instance of an application for each directory name.
 
-To create the ApplicationSet resource run the next commands -
+To create the ApplicationSet resource, run the following commands
 
 ```
 <hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/04.Application-Lifecycle/exercise-argocd/argocd-resources/appproject.yaml
@@ -408,7 +401,7 @@ To create the ApplicationSet resource run the next commands -
 <hub> $ oc apply -f https://raw.githubusercontent.com/ultraJeff/rhacm-workshop/master/04.Application-Lifecycle/exercise-argocd/argocd-resources/applicationset.yaml
 ```
 
-Note that two application instances have been created in the ArgoCD UI -
+Note that two application instances have been created in the ArgoCD UI
 
 ![argocd-applications](images/argocd-applications.png)
 
@@ -416,7 +409,7 @@ After viewing the applications and their resources in the ArgoCD dashboard, log 
 
 ![argocd-rhacm-applications](images/argocd-rhacm-applications.png)
 
-The deployed application resources can be seen in the ApplicationSet instance in RHACM -
+The deployed application resources can be seen in the ApplicationSet instance in RHACM
 
 ![rhacm-argocd-app-details](images/rhacm-argocd-app-details.png)
 
