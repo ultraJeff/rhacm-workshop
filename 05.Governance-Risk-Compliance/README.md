@@ -129,14 +129,16 @@ The above command creates two objects _Policy_ and _PlacementBinding_.
 * The _Policy_ objects define the NetworkPolicy that will be deployed on the managed cluster. It associates the NetworkPolicy with the webserver-acm namespace and enforces it.
 * The _PlacementBinding_ resource associates the _Policy_ object with the _PlacementRule_ resource created at the beginning of the exercise, allowing the Policy to apply to all clusters with the _environment=production_ label.
 
-After creating the objects, navigate to **Governance** -> **Policies** in the Red Hat Advanced Cluster Management for Kubernetes console. Note that the policy is configured, and the managed cluster is compliant.
+After creating the objects, navigate to **Governance** -> **Policies** in the Red Hat Advanced Cluster Management for Kubernetes console. Note that the `policy-networkpolicy-webserver` policy exists, and the managed cluster is compliant.
 
 Ensure the policy is effective by trying to navigate to the application once again - **https://&lt;webserver application route>/application.html**. (The application should not be accessible).
 
-In order to understand the difference between the various _complianceType_ values you can consult [https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.4/html-single/governance/index#configuration-policy-yaml-table](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.4/html-single/governance/index#configuration-policy-yaml-table):
+To understand the difference between the various _complianceType_ values
  * `musthave` will enforce the object and a subset of the fields
  * `mustonlyhave` will enforce the object with name and all of its fields
  * `mustnothave` will enforce that an object with the same name or labels must not exist
+
+See the [docs](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.4/html-single/governance/index#configuration-policy-yaml-table^) for more information.
 
 ### Stage 2 - Allow traffic from the Ingress Controller
 
